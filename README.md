@@ -7,12 +7,10 @@
  - run the program
 
 # What this program can do (command and types of command)
- UPLOAD /path/ $ upload a file to the server
- DELETE /filename/ 
- - delete a file from the server
- LOGOUT 
- - disconnect from the server
- LIST 
- - show the list of file in the server
- HELP 
- - show the list of command
+```
+UPLOAD /path/ - upload a file to the server
+DELETE /filename/ - delete a file from the server
+LOGOUT - disconnect from the server
+LIST - show the list of file in the server
+HELP - show the list of command
+```
