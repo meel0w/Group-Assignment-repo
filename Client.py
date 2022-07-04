@@ -1,15 +1,19 @@
-import socket
+ #import socket library to create tcp connection
+import socket  
 
+#Assign server IP and port 
 IP = '192.168.56.103'
 PORT = 4456
 ADDR = (IP, PORT)
 FORMAT = "utf-8"
 SIZE = 1024
 
+#create socket an connect to the server
 def main():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect(ADDR)
-
+    
+    #client receive data
     while True:
         data = client.recv(SIZE).decode(FORMAT)
         cmd, msg = data.split("@")
@@ -19,11 +23,13 @@ def main():
             break
         elif cmd == "OK":
             print(f"{msg}")
-
+        
+        #input
         data = input("> ")
         data = data.split(" ")
         cmd = data[0]
 
+        #client send command to server
         if cmd == "HELP":
             client.send(cmd.encode(FORMAT))
         elif cmd == "LOGOUT":
