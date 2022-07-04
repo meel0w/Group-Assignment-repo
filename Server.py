@@ -1,24 +1,26 @@
 import os
 import socket
-import threading
+import threading    # add socket and threading library for use of server-multiple client connections
 
 IP = ""
 PORT = 4456
 ADDR = (IP, PORT)
 SIZE = 1024
 FORMAT = "utf-8"
-SERVER_DATA_PATH = "Server_data"
+SERVER_DATA_PATH = "Server_data"        
 
+# for connection between multiple clients
 def handle_client(conn, addr):
-    print(f"[NEW CONNECTION] {addr} connected.")
+    print(f"[NEW CONNECTION] {addr} connected.")        #print the new connection that connected the server
     conn.send("OK@Welcome to the File Server.".encode(FORMAT))
 
+    # commands input from client side
     while True:
         data = conn.recv(SIZE).decode(FORMAT)
         data = data.split("@")
         cmd = data[0]
 
-        if cmd == "LIST":
+        if cmd == "LIST":       # list the file in server
             files = os.listdir(SERVER_DATA_PATH)
             send_data = "OK@"
 
@@ -28,7 +30,7 @@ def handle_client(conn, addr):
                 send_data += "\n".join(f for f in files)
             conn.send(send_data.encode(FORMAT))
 
-        elif cmd == "UPLOAD":
+        elif cmd == "UPLOAD":       # upload a file to the server
             name, text = data[1], data[2]
             filepath = os.path.join(SERVER_DATA_PATH, name)
             with open(filepath, "w") as f:
@@ -37,7 +39,7 @@ def handle_client(conn, addr):
             send_data = "OK@File uploaded successfully."
             conn.send(send_data.encode(FORMAT))
 
-        elif cmd == "DELETE":
+        elif cmd == "DELETE":       # delete a file on the server
             files = os.listdir(SERVER_DATA_PATH)
             send_data = "OK@"
             filename = data[1]
@@ -53,8 +55,11 @@ def handle_client(conn, addr):
 
             conn.send(send_data.encode(FORMAT))
 
+        # client disconnected from server
         elif cmd == "LOGOUT":
             break
+        
+        # show help commands
         elif cmd == "HELP":
             data = "OK@"
             data += "LIST: List all the files from the server.\n"
@@ -65,9 +70,10 @@ def handle_client(conn, addr):
 
             conn.send(data.encode(FORMAT))
 
-    print(f"[DISCONNECTED] {addr} disconnected")
+    print(f"[DISCONNECTED] {addr} disconnected")    # print disconnect from server
     conn.close()
 
+# function for server threading
 def main():
     print("[STARTING] Server is starting")
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -83,4 +89,3 @@ def main():
 
 if__name__ == "__main__":
     main()
-

@@ -1,3 +1,4 @@
+# read the cryptography library
 from cryptography.fernet import Fernet
 
 def write_key():
@@ -43,6 +44,8 @@ def decrypt(filename, key):
         file.write(decrypted_data)
 
 if __name__ == "__main__":
+    
+    # add argparse library, if the users give the program invalid arguments
     import argparse
     parser = argparse.ArgumentParser(description="Simple File Encryptor Script")
     parser.add_argument("file", help="File to encrypt/decrypt")
