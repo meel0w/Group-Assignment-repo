@@ -7,9 +7,8 @@
  - run the program
 
 # What this program can do (command and types of command)
- UPLOAD <path> 
- - upload a file to the server
- DELETE <filename> 
+ UPLOAD /path/ $ upload a file to the server
+ DELETE /filename/ 
  - delete a file from the server
  LOGOUT 
  - disconnect from the server
