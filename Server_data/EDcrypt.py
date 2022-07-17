@@ -71,8 +71,8 @@ if __name__ == "__main__":
     if encrypt_ and decrypt_:
         raise TypeError("Please specify whether you want to encrypt the file or decrypt it.")
     elif encrypt_:
-        encrypt(file, key)
+        encrypt(file, b'nNjpIl9Ax2LRtm-p6ryCRZ8lRsL0DtuY0f9JeAe2wG0=')
     elif decrypt_:
-        decrypt(file, key)
+        decrypt(file, b'nNjpIl9Ax2LRtm-p6ryCRZ8lRsL0DtuY0f9JeAe2wG0=')
     else:
         raise TypeError("Please specify whether you want to encrypt the file or decrypt it.")

@@ -11,7 +11,7 @@ SERVER_DATA_PATH = "Server_data"
 
 # for connection between multiple clients
 def handle_client(conn, addr):
-    print(f"[NEW CONNECTION] {addr} connected.")        #print the new connection that connected the server
+    print(f"[NEW CONNECTION] {addr} connected.")    #print the new connection that connected the server
     conn.send("OK@Welcome to the File Server.".encode(FORMAT))
 
     # commands input from client side
@@ -87,5 +87,5 @@ def main():
         thread.start()
         print(f"[ACTIVE CONNECTIONS] {threading.activeCount() - 1}")
 
-if__name__ == "__main__":
+if __name__ == "__main__":
     main()
